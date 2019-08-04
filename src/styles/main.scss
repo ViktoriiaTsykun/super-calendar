@@ -1,7 +1,40 @@
-@import "utils";
-@import "fonts";
-@import "typography";
+@import "vars";
+@import "mixins";
 
 body {
-  background: $c-gray;
+  display: flex;
+  justify-content: center;
 }
+
+.calendar {
+  display: grid;
+  grid-template: repeat(6, 100px) / repeat(7, 100px);
+  grid-gap: 1px;
+  counter-reset: weekdays;
+
+  & div {
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: $main-bg-color;
+    counter-increment: weekdays;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+      content: counter(weekdays);
+      font-size: $main-font-size;
+      font-family: $main-font-family;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg-color;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@include initial-day();
+@include amount_of_days();

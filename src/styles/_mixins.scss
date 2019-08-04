@@ -1,0 +1,16 @@
+@mixin initial_day() {
+  @each $day in $weekday-list {
+    $i: index($weekday-list, $day);
+    .calendar-#{$day} div:first-child {
+      grid-column-start: #{$i};
+    }
+  }
+}
+
+@mixin amount_of_days() {
+  @for $i from 28 through 30 {
+    .calendar-#{$i} div:nth-child(#{$i}) ~ div {
+      display: none;
+    }
+  }
+}
